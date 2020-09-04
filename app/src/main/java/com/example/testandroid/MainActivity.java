@@ -14,6 +14,8 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -40,8 +42,94 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        post();
-        uploadFile();
+//        post();
+//        uploadFile();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                download();
+            }
+        }).start();
+    }
+
+    private void download() {
+        String downloadUrl = Constant.DOWNLOAD_FILE_URL;
+        String fileName = downloadUrl.substring(downloadUrl.lastIndexOf("/")+1);
+        Log.d(TAG, "download: fileName=" + fileName + ",downloadUrl=" + downloadUrl);
+        File file = FileUtils.getDownloadFile(fileName);
+        if (file == null) {
+            Log.d(TAG, "download: fail, dir is null");
+            return;
+        }
+
+        long downloadLength = 0;
+        if (file.exists()) {
+            downloadLength = file.length();
+        }
+        long totalLength = getContentLength(downloadUrl);
+        if (totalLength == 0) {
+            Log.d(TAG, "download: url is error");
+            return;
+        }
+        if (downloadLength == totalLength) {
+            Log.d(TAG, "download: done");
+            return;
+        }
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .addHeader("RANGE", "bytes=" + downloadLength + "-" + totalLength)  //断点续传要用到的，指示下载的区间
+                .url(downloadUrl).build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            ResponseBody body = response.body();
+            if (body == null) {
+                Log.d(TAG, "download: body is null");
+                return;
+            }
+            InputStream inputStream = body.byteStream();
+            RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
+            randomAccessFile.seek(downloadLength);
+            byte[] b = new byte[1024];
+            int total = 0;
+            int len;
+            while ((len = inputStream.read(b)) != -1) {
+                total += len;
+                randomAccessFile.write(b, 0, len);
+                //计算已经下载的百分比
+                int progress = (int) ((total + downloadLength) * 100 / totalLength);
+                Log.d(TAG, "download: progress=" + progress + ",total="+total+",downloadLength="+downloadLength+",totalLength="+totalLength);
+            }
+            body.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 得到下载内容的完整大小
+     *
+     * @param downloadUrl 下载地址
+     * @return 下载总大小
+     */
+    private long getContentLength(String downloadUrl) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(downloadUrl).build();
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                ResponseBody body = response.body();
+                long contentLength = body == null ? 0 : body.contentLength();
+                if (body != null) {
+                    body.close();
+                }
+                return contentLength;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     private void getSync() {
@@ -141,16 +229,16 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     StringBuilder stringBuilder = new StringBuilder();
-                    for (int i=0;i < 1000;i ++){
+                    for (int i = 0; i < 1000; i++) {
                         stringBuilder.append("Hello world Hello world Hello world Hello world Hello world ").append("\n");
                     }
                     File file = FileUtils.save(stringBuilder.toString());
-                    if(file == null){
+                    if (file == null) {
                         return;
                     }
                     OkHttpClient client = new OkHttpClient();
                     MultipartBody body = new MultipartBody.Builder()
-                            .addFormDataPart("file", file.getName(),createCustomRequestBody(MediaType.get("application/octet-stream"),file))
+                            .addFormDataPart("file", file.getName(), createCustomRequestBody(MediaType.get("application/octet-stream"), file))
                             .build();
                     Request request = new Builder()
                             .url(Constant.UPLOAD_FILE)
@@ -182,15 +270,18 @@ public class MainActivity extends AppCompatActivity {
 
     public static RequestBody createCustomRequestBody(final MediaType contentType, final File file) {
         return new RequestBody() {
-            @Override public MediaType contentType() {
+            @Override
+            public MediaType contentType() {
                 return contentType;
             }
 
-            @Override public long contentLength() {
+            @Override
+            public long contentLength() {
                 return file.length();
             }
 
-            @Override public void writeTo(@NotNull BufferedSink sink) {
+            @Override
+            public void writeTo(@NotNull BufferedSink sink) {
                 Source source;
                 try {
                     source = Okio.source(file);
@@ -201,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
                         sink.write(buf, readCount);
                         downloadCount += readCount;
                         float progress = downloadCount * 1f / totalCount;
-                        Log.d(TAG, "writeTo: totalBytes=" + totalCount+",remaining="+downloadCount+",isDone="+(downloadCount == totalCount)+",progress="+progress);
+                        Log.d(TAG, "writeTo: totalBytes=" + totalCount + ",remaining=" + downloadCount + ",isDone=" + (downloadCount == totalCount) + ",progress=" + progress);
 
                     }
                 } catch (Exception e) {

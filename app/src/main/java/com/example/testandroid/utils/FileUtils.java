@@ -6,6 +6,8 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.Environment;
 
+import com.example.testandroid.MainApplication;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -60,6 +62,13 @@ public class FileUtils {
         return logFile;
     }
 
+    public static File getDownloadFile(String fileName){
+        File dir = MainApplication.getInstance().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+        if (dir == null || !dir.exists() || dir.isFile()) {
+            return null;
+        }
 
+        return new File(dir,fileName);
+    }
 
 }
