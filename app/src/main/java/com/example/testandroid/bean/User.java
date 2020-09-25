@@ -1,24 +1,15 @@
 package com.example.testandroid.bean;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
 import org.jetbrains.annotations.NotNull;
 
-@Entity
 public class User {
 
-    @PrimaryKey(autoGenerate = true)
     private int id;
 
-    @ColumnInfo
     private String name;
 
-    @ColumnInfo
     private String password;
 
-    @ColumnInfo
     private String extras;
 
     public int getId() {

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TestAndroid</string>
+    <string name="response_text">Received response for %s in %.1fms%n%s</string>
 </resources>
