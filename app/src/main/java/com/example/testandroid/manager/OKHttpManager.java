@@ -38,7 +38,7 @@ public class OKHttpManager {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String downloadUrl = Constant.DOWNLOAD_FILE_URL;
+                String downloadUrl = Constant.BASE_URL + Constant.DOWNLOAD_FILE_URL;
                 String fileName = downloadUrl.substring(downloadUrl.lastIndexOf("/")+1);
                 Log.d(TAG, "download: fileName=" + fileName + ",downloadUrl=" + downloadUrl);
                 File file = FileUtils.getDownloadFile(fileName);
@@ -123,7 +123,7 @@ public class OKHttpManager {
             @Override
             public void run() {
                 try {
-                    Request request = new Request.Builder().url(Constant.LIST_ALL_STUDENT).get().build();
+                    Request request = new Request.Builder().url(Constant.BASE_URL + Constant.LIST_STUDENT +"?page_no=1&page_size=10").get().build();
                     Call call = LoggingInterceptors.getInstance().getClient().newCall(request);
                     Response response = call.execute();
                     Log.d(TAG, "getSync run: isSuccess=" + response.isSuccessful() + ",code=" + response.code() + ",body" + response.body());
@@ -145,7 +145,7 @@ public class OKHttpManager {
             @Override
             public void run() {
                 try {
-                    Request request = new Request.Builder().url(Constant.LIST_ALL_STUDENT).get().build();
+                    Request request = new Request.Builder().url(Constant.BASE_URL + Constant.LIST_STUDENT +"?page_no=1&page_size=10").get().build();
                     Call call = LoggingInterceptors.getInstance().getClient().newCall(request);
                     call.enqueue(new Callback() {
                         @Override
@@ -180,7 +180,7 @@ public class OKHttpManager {
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("json", "json");
                     RequestBody requestBody = RequestBody.create(JSON, jsonObject.toString());
-                    Request request = new Request.Builder().url(Constant.LIST_ALL_STUDENT).post(requestBody).build();
+                    Request request = new Request.Builder().url(Constant.BASE_URL + Constant.LIST_STUDENT +"?page_no=1&page_size=10").post(requestBody).build();
                     Call call = LoggingInterceptors.getInstance().getClient().newCall(request);
                     call.enqueue(new Callback() {
                         @Override
@@ -223,7 +223,7 @@ public class OKHttpManager {
                             .addFormDataPart("file", file.getName(), createCustomRequestBody(MediaType.get("application/octet-stream"), file))
                             .build();
                     Request request = new Request.Builder()
-                            .url(Constant.UPLOAD_FILE)
+                            .url(Constant.BASE_URL + Constant.UPLOAD_FILE)
                             .post(body)
                             .build();
                     Call call = LoggingInterceptors.getInstance().getClient().newCall(request);

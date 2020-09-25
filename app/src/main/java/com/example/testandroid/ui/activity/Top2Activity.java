@@ -1,9 +1,11 @@
-package com.example.testandroid;
+package com.example.testandroid.ui.activity;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.testandroid.R;
 
 public class Top2Activity extends AppCompatActivity {
 

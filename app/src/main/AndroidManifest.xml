@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Top2Activity" />
-        <activity android:name=".TopActivity"/>
+        <activity android:name=".ui.activity.Top2Activity" />
+        <activity android:name=".ui.activity.TopActivity"/>
 
         <!-- 单元测试配置 -->
         <uses-library android:name="android.test.runner" />

@@ -1,4 +1,4 @@
-package com.example.testandroid;
+package com.example.testandroid.ui.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+
+import com.example.testandroid.R;
 
 public class TopActivity extends AppCompatActivity {
 

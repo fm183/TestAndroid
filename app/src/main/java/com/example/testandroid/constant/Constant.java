@@ -4,8 +4,8 @@ public class Constant {
 
     public static final String EVENT_DISTRIBUTION_TAG = "eventDistribution";
 
-    private static final String HTTP = "http://fm.codingxuan.com";
-    public static final String UPLOAD_FILE = HTTP + "/upload";
-    public static final String LIST_ALL_STUDENT = HTTP + "/student/list";
-    public static final String DOWNLOAD_FILE_URL = HTTP + "/logs";
+    public static final String BASE_URL = "http://fm.codingxuan.com";
+    public static final String UPLOAD_FILE =  "/upload";
+    public static final String LIST_STUDENT ="/student/list";
+    public static final String DOWNLOAD_FILE_URL = "/logs";
 }
