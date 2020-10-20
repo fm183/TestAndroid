@@ -47,7 +47,7 @@ public class MyFragment extends BottomSheetDialogFragment implements ILoadStuden
         super.onStart();
         //获取dialog对象
         Dialog dialog = getDialog();
-        //把windowsd的默认背景颜色去掉，不然圆角显示不见
+        //把windows的默认背景颜色去掉，不然圆角显示不见
         if (!(dialog instanceof BottomSheetDialog)) {
             return;
         }
@@ -72,18 +72,6 @@ public class MyFragment extends BottomSheetDialogFragment implements ILoadStuden
         }
         view.findViewById(R.id.re_back_img).setOnClickListener(v -> behavior.setState(BottomSheetBehavior.STATE_HIDDEN));
 
-    }
-
-    /**
-     * 弹窗高度，默认为屏幕高度的四分之三
-     * 子类可重写该方法返回peekHeight
-     *
-     * @return height
-     */
-    protected int getPeekHeight() {
-        int peekHeight = getResources().getDisplayMetrics().heightPixels;
-        //设置弹窗高度为屏幕高度的3/4
-        return peekHeight - peekHeight / 3;
     }
 
     @Nullable
