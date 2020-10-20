@@ -1,6 +1,7 @@
 package com.example.testandroid.ui.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testandroid.R;
-import com.example.testandroid.api.ILoadStudentListener;
+import com.example.testandroid.inf.ILoadStudentListener;
 import com.example.testandroid.bean.StudentResponse;
+import com.example.testandroid.inf.OnItemClickListener;
 import com.example.testandroid.manager.StudentManager;
 import com.example.testandroid.ui.adapter.StudentAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity  implements ILoadStudentList
         StudentManager.getInstance().refresh(this);
         smartRefreshLayout.setOnRefreshListener(refreshLayout -> StudentManager.getInstance().refresh(MainActivity.this));
         smartRefreshLayout.setOnLoadMoreListener(refreshLayout -> StudentManager.getInstance().loadMore(MainActivity.this));
+
+        studentAdapter.setOnItemClickListener((dataBean, view) -> new MyFragment().show(getSupportFragmentManager(),"dialog"));
     }
 
     @Override

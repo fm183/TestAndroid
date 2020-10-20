@@ -1,6 +1,6 @@
 package com.example.testandroid.manager;
 
-import com.example.testandroid.api.ILoadStudentListener;
+import com.example.testandroid.inf.ILoadStudentListener;
 import com.example.testandroid.api.StudentService;
 import com.example.testandroid.bean.StudentResponse;
 import com.example.testandroid.utils.LoggingInterceptors;
