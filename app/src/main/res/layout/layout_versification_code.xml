@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:background="@android:color/transparent"
+            android:cursorVisible="false"
+            android:textColor="@android:color/transparent"
+            android:id="@+id/et_code"
+            android:hint=""
+            app:layout_constraintTop_toTopOf="@id/ll_code"
+            app:layout_constraintBottom_toBottomOf="@id/ll_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            tools:ignore="LabelFor" />
+
+        <LinearLayout
+            android:id="@+id/ll_code"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_20"
+            android:background="@drawable/bg_et_login"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_code1"
+                style="@style/VersificationCodeTextStyle" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/item_mobile_code_line_color" />
+
+            <TextView
+                android:id="@+id/tv_code2"
+                style="@style/VersificationCodeTextStyle" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/item_mobile_code_line_color" />
+
+            <TextView
+                android:id="@+id/tv_code3"
+                style="@style/VersificationCodeTextStyle" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/item_mobile_code_line_color" />
+
+            <TextView
+                android:id="@+id/tv_code4"
+                style="@style/VersificationCodeTextStyle" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</merge>

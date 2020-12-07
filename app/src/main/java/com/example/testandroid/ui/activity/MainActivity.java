@@ -2,6 +2,7 @@ package com.example.testandroid.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.example.testandroid.manager.MobileCodeManager;
 import com.example.testandroid.manager.StudentManager;
 import com.example.testandroid.ui.adapter.MobileCodeAdapter;
 import com.example.testandroid.ui.adapter.StudentAdapter;
+import com.example.testandroid.view.VersificationCodeLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.List;
@@ -58,6 +60,20 @@ public class MainActivity extends AppCompatActivity  implements ILoadStudentList
 
         MobileCodeManager.getInstance().addListener((countryMobileCodeList, countryMobileIndexList) -> mobileCodeAdapter.updateData(countryMobileCodeList));
         MobileCodeManager.getInstance().loadMobileCode();
+
+       VersificationCodeLayout versificationCodeLayout =  findViewById(R.id.vcl);
+       versificationCodeLayout.setOnInputListener(new VersificationCodeLayout.OnInputListener() {
+           @Override
+           public void onSuccess(String code) {
+               Log.d(MainActivity.class.getSimpleName(), "onSuccess: code="+code);
+           }
+
+           @Override
+           public void onInput() {
+               Log.d(MainActivity.class.getSimpleName(), "onInput:");
+
+           }
+       });
     }
 
     @Override
