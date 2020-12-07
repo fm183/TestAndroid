@@ -3,4 +3,14 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+
+
+    <color name="text_color_black">#333333</color>
+    <color name="base_text_gray">#ABABAB</color>
+
+    <color name="item_mobile_code_title_text_color">#959595</color>
+    <color name="item_mobile_code_line_color">#DBDBDB</color>
+
+    <color name="item_mobile_code_index_bg_color">#F4F4F4</color>
 </resources>

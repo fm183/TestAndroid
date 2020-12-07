@@ -1,5 +1,6 @@
 package com.example.testandroid.ui.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -10,10 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testandroid.R;
+import com.example.testandroid.bean.CountryMobileCode;
 import com.example.testandroid.inf.ILoadStudentListener;
 import com.example.testandroid.bean.StudentResponse;
 import com.example.testandroid.inf.OnItemClickListener;
+import com.example.testandroid.manager.MobileCodeManager;
 import com.example.testandroid.manager.StudentManager;
+import com.example.testandroid.ui.adapter.MobileCodeAdapter;
 import com.example.testandroid.ui.adapter.StudentAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -26,13 +30,14 @@ public class MainActivity extends AppCompatActivity  implements ILoadStudentList
 
     private StudentAdapter studentAdapter;
     private SmartRefreshLayout smartRefreshLayout;
+    private MobileCodeAdapter mobileCodeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        smartRefreshLayout = findViewById(R.id.smart_refresh_layout);
+        /*smartRefreshLayout = findViewById(R.id.smart_refresh_layout);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         studentAdapter =  new StudentAdapter();
@@ -43,7 +48,16 @@ public class MainActivity extends AppCompatActivity  implements ILoadStudentList
         smartRefreshLayout.setOnRefreshListener(refreshLayout -> StudentManager.getInstance().refresh(MainActivity.this));
         smartRefreshLayout.setOnLoadMoreListener(refreshLayout -> StudentManager.getInstance().loadMore(MainActivity.this));
 
-        studentAdapter.setOnItemClickListener((dataBean, view) -> new MyFragment().show(getSupportFragmentManager(),"dialog"));
+        studentAdapter.setOnItemClickListener((dataBean, view) -> new MyFragment().show(getSupportFragmentManager(),"dialog"));*/
+
+        RecyclerView recyclerViewCode = findViewById(R.id.recycler_view_code);
+        mobileCodeAdapter = new MobileCodeAdapter();
+        recyclerViewCode.setAdapter(mobileCodeAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerViewCode.setLayoutManager(linearLayoutManager);
+
+        MobileCodeManager.getInstance().addListener((countryMobileCodeList, countryMobileIndexList) -> mobileCodeAdapter.updateData(countryMobileCodeList));
+        MobileCodeManager.getInstance().loadMobileCode();
     }
 
     @Override

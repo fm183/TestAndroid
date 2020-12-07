@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">TestAndroid</string>
     <string name="response_text">Received response for %s in %.1fms%n%s</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="default_mobile_country">中国</string>
+    <string name="mobile_prefix_text">+86</string>
+
 </resources>
