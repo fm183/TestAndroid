@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.testandroid.R;
 import com.example.testandroid.bean.CountryMobileCode;
 import com.example.testandroid.inf.ILoadStudentListener;
@@ -74,6 +78,13 @@ public class MainActivity extends AppCompatActivity  implements ILoadStudentList
 
            }
        });
+
+       ImageView circle = findViewById(R.id.iv_circle);
+
+        Glide.with(this)
+                .load("http://honghua.ilikemanga.com/res/83f043d06036426bbc01397c568637a1.jpg?1920x1920")//图片路径，可以是网络路径
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(circle);
     }
 
     @Override

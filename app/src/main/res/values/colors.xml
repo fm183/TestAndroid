@@ -14,4 +14,7 @@
 
     <color name="item_mobile_code_index_bg_color">#F4F4F4</color>
 
+    <color name="main_tab_line_start_color">#7A59F6</color>
+    <color name="main_tab_line_end_color">#AC72E7</color>
+
 </resources>
