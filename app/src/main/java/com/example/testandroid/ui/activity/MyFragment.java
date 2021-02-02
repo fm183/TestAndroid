@@ -19,10 +19,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testandroid.R;
+import com.example.testandroid.bean.MyViewMode;
 import com.example.testandroid.bean.StudentResponse;
 import com.example.testandroid.inf.ILoadStudentListener;
+import com.example.testandroid.inf.OnItemClickListener;
 import com.example.testandroid.manager.StudentManager;
 import com.example.testandroid.ui.adapter.StudentAdapter;
+import com.example.testandroid.viewmodule.MyViewModule;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -98,6 +101,14 @@ public class MyFragment extends BottomSheetDialogFragment implements ILoadStuden
 
         smartRefreshLayout.setOnRefreshListener(refreshLayout -> StudentManager.getInstance().refresh(this));
         smartRefreshLayout.setOnLoadMoreListener(refreshLayout -> StudentManager.getInstance().loadMore(this));
+
+        MyViewModule myViewModule = MyViewModule.getInstance(this.getViewModelStore());
+        studentAdapter.setOnItemClickListener(new OnItemClickListener<StudentResponse.DataBean>() {
+            @Override
+            public void onItemClick(StudentResponse.DataBean dataBean, View view) {
+                myViewModule.getData().postValue(new MyViewMode());
+            }
+        });
     }
 
     @Override

@@ -1,2 +1,2 @@
 rootProject.name='TestAndroid'
-include ':app'
+include ':app',':networklib'

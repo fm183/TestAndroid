@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundImageView">
+        <attr name="radius" format="reference|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="AllRoundImageView">
+        <attr name="all_radius" format="reference|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="MyToolBar">
+        <attr name="my_tool_bar_title" format="string|reference" />
+        <attr name="my_tool_bar_title_color" format="color" />
+        <attr name="my_tool_bar_right_text" format="string|reference" />
+        <attr name="my_tool_bar_right_color" format="color" />
+        <attr name="my_tool_bar_back_show" format="boolean" />
+        <attr name="my_tool_bar_right_icon" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="EditLayout">
+        <attr name="hint" format="string|reference" />
+        <attr name="hint_color" format="color" />
+        <attr name="text_color" format="color" />
+        <attr name="text_size" format="reference|dimension" />
+        <attr name="inputType" format="integer" />
+
+    </declare-styleable>
+
+
+    <declare-styleable name="PlayerProgressView">
+        <attr name="progress_color" format="color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="ScoreResultView">
+        <attr name="result_text_size" format="reference|dimension" />
+        <attr name="result_bottom_text_size" format="reference|dimension" />
+        <attr name="result_text_color" format="color" />
+        <attr name="result_bottom_text_color" format="color" />
+        <attr name="result_bottom_text" format="reference|string"/>
+    </declare-styleable>
+</resources>

@@ -2,6 +2,7 @@ package com.example.testandroid.ui.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.testandroid.R;
+import com.example.testandroid.viewmodule.MyViewModule;
 
 public class TopActivity extends AppCompatActivity {
 
@@ -24,6 +26,11 @@ public class TopActivity extends AppCompatActivity {
                 Log.d("MainActivity", "TopActivity onClick: ");
                 startActivityForResult(new Intent(TopActivity.this,Top2Activity.class),1);
             }
+        });
+
+        MyViewModule myViewModule = MyViewModule.getInstance(this.getViewModelStore());
+        myViewModule.getData().observe(this,myMode -> {
+            Log.d("MyViewModule ", "TopActivity onCreate: ");
         });
 
     }
