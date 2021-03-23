@@ -21,4 +21,7 @@
 
     <color name="withdraw_alert_btn_start_color">#FF421A</color>
     <color name="withdraw_alert_btn_end_color">#FC6C13</color>
+
+    <color name="divider_color">#e6e6e6</color>
+
 </resources>

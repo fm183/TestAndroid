@@ -1,153 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.activity.MainActivity">
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/smart_refresh_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-    <com.example.testandroid.view.DragFloatActionButton
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <com.example.testandroid.view.NumberLockView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="400dp"
-        android:background="@android:color/black"
-        android:visibility="gone"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginEnd="@dimen/dp_10"
-        android:id="@+id/recycler_view_code"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
-
-    <com.example.testandroid.view.VersificationCodeLayout
-        android:id="@+id/vcl"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-
-    <ImageView
-        android:padding="@dimen/dp_2"
-        android:background="@drawable/bg_circle"
-        android:id="@+id/iv_circle"
-        android:contentDescription="@null"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-
-
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager2"
+        android:visibility="gone"
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/ll_bottom"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tab"/>
 
-    <LinearLayout
+    <com.google.android.material.tabs.TabLayout
         android:visibility="gone"
+        android:id="@+id/tab"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tv_home"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:paddingTop="@dimen/dp_10"
-            android:paddingBottom="@dimen/dp_10"
-            android:text="@string/tab1"
-            android:textColor="@color/main_tab_text_color"
-            android:textSize="@dimen/sp_16"
-            app:drawableBottomCompat="@drawable/bg_main_tab_line" />
-        <TextView
-            android:id="@+id/tv_message"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:paddingTop="@dimen/dp_10"
-            android:paddingBottom="@dimen/dp_10"
-            android:text="@string/tab2"
-            android:textColor="@color/main_tab_text_color"
-            android:textSize="@dimen/sp_16"
-            app:drawableBottomCompat="@drawable/bg_main_tab_line" />
-    </LinearLayout>
+        android:layout_height="60dp"/>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+    <com.example.testandroid.view.LuckyDrawConstraintView
+        android:id="@+id/ldcv_bottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintWidth_percent="0.7"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="@dimen/dp_300"
-        android:layout_height="@dimen/dp_300"
-        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:visibility="gone"
-        android:background="@drawable/bg_take_gold_alert">
-        <com.example.testandroid.view.AllRoundImageView
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/iv_avatar"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            app:all_radius="@dimen/dp_15"
-            android:src="@drawable/bg_view_take_gold_alert"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        />
 
 
-    <com.example.testandroid.view.DayWithdrawProgressView
+    <com.example.testandroid.view.LuckyLayout
+        android:background="#932E2F"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/day_withdraw_progress"
-        android:layout_width="@dimen/dp_100"
-        android:layout_height="@dimen/dp_14"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/luck_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
