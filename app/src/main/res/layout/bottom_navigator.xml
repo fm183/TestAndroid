@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="71dp"
+    android:clipChildren="false"
+    android:paddingBottom="10dp"
+    android:background="#00000000"
+    android:gravity="bottom"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <ImageView
+        android:id="@+id/first"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_weight="1"
+        android:src="@drawable/icon_home_lan"/>
+
+    <ImageView
+        android:id="@+id/second"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_weight="1"
+        android:src="@drawable/icon_new"/>
+
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/icon_person"
+        android:layout_marginBottom="9dp"
+        android:id="@+id/centerIcon"/>
+
+
+
+    <ImageView
+        android:id="@+id/third"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_weight="1"
+        android:src="@drawable/icon_person" />
+
+    <ImageView
+        android:id="@+id/forth"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_weight="1"
+        android:src="@drawable/icon_person"/>
+
+</LinearLayout>

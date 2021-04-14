@@ -8,11 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.testandroid.R;
 import com.example.testandroid.ui.fragment.Fragment1;
 import com.example.testandroid.ui.fragment.Fragment2;
+import com.example.testandroid.view.BottomNavigationBar;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         LuckyLayout luckyLayout = findViewById(R.id.luck_layout);
         luckyLayout.setLuckyText(data);*/
 
-        new Thread(() -> {
+        /*new Thread(() -> {
             try {
                 URL url = new URL("http://s.zzurl.cn");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -85,7 +87,12 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }).start();
+        }).start();*/
+
+
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        BottomNavigationBar bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
+        bottomNavigationBar.setUpWithViewPager(viewPager);
 
     }
     private static class MainFragmentPagerAdapter extends FragmentStateAdapter {
