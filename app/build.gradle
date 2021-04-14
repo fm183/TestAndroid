@@ -61,5 +61,8 @@ dependencies {
 
     implementation project(path: ':networklib')
     implementation 'com.qq.e.union:union:4.310.1180'
+    // https://mvnrepository.com/artifact/org.json/json
+    testImplementation group: 'org.json', name: 'json', version: '20210307'
+
 
 }

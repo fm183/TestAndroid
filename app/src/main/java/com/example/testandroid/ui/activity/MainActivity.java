@@ -1,6 +1,7 @@
 package com.example.testandroid.ui.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
@@ -8,17 +9,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.testandroid.R;
 import com.example.testandroid.ui.fragment.Fragment1;
 import com.example.testandroid.ui.fragment.Fragment2;
-import com.example.testandroid.view.LuckyLayout;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); //透明导航栏
 
-        TabLayout tabLayout = findViewById(R.id.tab);
+      /*  TabLayout tabLayout = findViewById(R.id.tab);
         ViewPager2 viewPager2 = findViewById(R.id.view_pager);
         viewPager2.setAdapter(new MainFragmentPagerAdapter(this));
         viewPager2.setOffscreenPageLimit(2);
@@ -46,7 +47,46 @@ public class MainActivity extends AppCompatActivity {
         data.add("50元");
         data.add("???元");
         LuckyLayout luckyLayout = findViewById(R.id.luck_layout);
-        luckyLayout.setLuckyText(data);
+        luckyLayout.setLuckyText(data);*/
+
+        new Thread(() -> {
+            try {
+                URL url = new URL("http://s.zzurl.cn");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setDoInput(true);
+                connection.setConnectTimeout(6000);
+                connection.setReadTimeout(6000);
+                connection.connect();
+
+                int nResponseCode = connection.getResponseCode();
+
+                byte[] buffer = new byte[4096];
+                int nReadSize;
+
+                InputStream is;
+                if (nResponseCode == HttpURLConnection.HTTP_OK
+                        || nResponseCode == HttpURLConnection.HTTP_CREATED
+                        || nResponseCode == HttpURLConnection.HTTP_ACCEPTED) {
+                    is = connection.getInputStream();
+                } else {
+                    is = connection.getErrorStream();
+                }
+                BufferedInputStream bis = new BufferedInputStream(is);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream(bis.available());
+                while ((nReadSize = bis.read(buffer)) > 0) {
+                    baos.write(buffer, 0, nReadSize);
+                }
+
+                Log.e(MainActivity.class.getSimpleName(),"onCreate code="+nResponseCode+",result="+new String(baos.toByteArray()));
+                is.close();
+                bis.close();
+                baos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
     }
     private static class MainFragmentPagerAdapter extends FragmentStateAdapter {
 
