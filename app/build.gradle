@@ -58,11 +58,15 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'jp.wasabeef:glide-transformations:3.0.1'
 
     implementation project(path: ':networklib')
     implementation 'com.qq.e.union:union:4.310.1180'
     // https://mvnrepository.com/artifact/org.json/json
     testImplementation group: 'org.json', name: 'json', version: '20210307'
+    implementation 'com.youth.banner:banner:2.1.0'
+    implementation 'com.github.wangpeiyuan:CycleViewPager2:v1.0.7'
 
+    implementation 'com.to.aboomy:pager2banner:1.0.3'
 
 }
